@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collectible Sneakers</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      overflow: auto;
+      scroll-snap-type: y mandatory;
+    }
+
+    .custom-background {
+      background-color: rgb(255, 247, 234); /* Pembe arka plan */
+  }
+    .section {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      scroll-snap-align: start;
+    }
+
+    .main-section {
+      background-image: url('https://static.vecteezy.com/system/resources/previews/009/924/607/original/cute-brown-aesthetic-abstract-minimal-background-perfect-for-wallpaper-backdrop-postcard-background-vector.jpg');
+      text-align: left;
+      padding: 0px;
+    }
+
+    .btn-custom {
+      border: 1px solid brown;
+      color: brown;
+    }
+
+    .btn-custom:hover {
+      background-color: #9e938b;
+      color: brown;
+    }
+
+    .feature-box {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .feature-icon {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    .feature-description {
+      font-size: 14px;
+    }
+
+    .main-content {
+      display: flex;
+      flex-direction: row; 
+      width: 100%;
+     
+      
+    }
+
+    .main-content .text-content {
+      max-width: 75%;
+      flex:1 ;
+    }
+
+    .main-content .img-content {
+      max-width: 40%;
+      flex:1;
+    }
+
+    .row-padding {
+      padding: 0 20px;
+    }
+
+    .header {
+      color: brown;
+      padding: 10px 20px;
+    }
+
+    .header a {
+      color: brown;
+    }
+
+    .header a.btn-custom {
+      border-color: #8B4513;
+      /* Özel butonun kenar rengini belirleyin */
+      color: #8B4513;
+      /* Özel buton metin rengini belirleyin */
+    }
+
+    .header a.btn-custom:hover {
+      background-color: #8B4513;
+      /* Özel butonun üzerine gelindiğinde arka plan rengini değiştirin */
+      color: white;
+      /* Özel buton metin rengini beyaz yapın */
+    }
+
+    .best-section {
+      background-image: url("best_section.png");
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: left;
+      padding: 20px;
+    }
+    .best-section h2 {
+      color: white;
+      margin-bottom: 40px;
+    }
+    .card {
+      width: 220px;
+      /* Kartların sabit genişliğini artırır */
+      padding: 20px;
+      /* Kart içeriğine biraz daha boşluk ekler */
+      margin: 0 15px;
+      /* Kartlar arası boşluğu artırır */
+      min-width: 300px;
+      /* Kartların minimum genişliğini artırır */
+      border: none;
+      background-color: #0A1B2A;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .card img {
+      border-radius: 10px;
+    }
+
+    .card-body {
+      background-color: #0A1B2A;
+    }
+
+    .btn-buy {
+      background-color: transparent;
+      border: 1px solid white;
+      color: white;
+    }
+
+    .btn-buy:hover {
+      background-color: white;
+      color: #0A1B2A;
+    }
+
+
+    .join-us-section {
+      background-image: url('join_us_section.png');
+      padding: 50px;
+      text-align: left;
+    }
+
+    .join-us-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .join-us-text {
+      max-width: 50%;
+    }
+
+    .join-us-image {
+      position: relative;
+      max-width: 45%;
+    }
+
+    .join-us-image img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+    }
+
+    .love-us-section {
+      background-color: #FDF7E8;
+      padding: 50px;
+      text-align: center;
+    }
+
+    .love-us-title {
+      margin-bottom: 20px;
+    }
+
+    .love-us-container {
+      background-color: #e9b590;
+      display: flex;
+      overflow-x: scroll;
+      scroll-behavior: smooth;
+      padding: 0 20px;
+      /* Sağ ve sol kenar boşluklarını azaltır */
+      max-width: 80%;
+      /* Maksimum genişliği azaltır */
+      margin: 0 auto;
+      /* Ortaya hizalar */
+    }
+
+    .love-us-card {
+      background-color: white;
+      /* Kartın arka plan rengini beyaz yapar */
+      width: 220px;
+      /* Kartların sabit genişliğini artırır */
+      padding: 20px;
+      /* Kart içeriğine biraz daha boşluk ekler */
+      margin: 10px 15px;
+      /* Kartlar arası boşluğu artırır */
+      min-width: 300px;
+      /* Kartların minimum genişliğini artırır */
+      border-radius: 10%;
+    }
+
+
+
+    .love-us-card:hover {
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .love-us-navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .love-us-navigation button {
+      background-color: #8B4513;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 24px;
+    }
+
+    .love-us-navigation button {
+      background-color: #8B4513;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 24px;
+    }
+
+    .grow-section {
+      background-image: url('grow_section.png');
+      padding: 50px;
+ 
+    }
+
+    .grow-title {
+
+     
+      margin-bottom: 150px;
+      left: 0;
+      width: 100%;
+      background-color: #fff; /* Başlığın arka plan rengi */
+      padding: 20px; /* Başlık içeriği etrafındaki boşluk */
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Gölge efekti */
+      z-index: 999; /* Diğer içeriklerin üstünde olmasını sağlar */
+            
+    }
+
+    .grow-title h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    .grow-title p {
+      color: #666;
+    }
+
+    .grow-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 300px;
+      margin-left: 10px;
+      margin-bottom: 300px;
+      /* Kartı sola yaslamak için eklendi */
+    }
+
+
+    .grow-ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .grow-ul li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding: 8px;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+      cursor: pointer;
+    }
+
+    .grow-ul li:hover {
+      background-color: #f1f1f1;
+    }
+
+    .grow-ul li i {
+      margin-right: 10px;
+    }
+
+    .grow-ul li a {
+      text-decoration: none;
+      color: #000;
+      flex-grow: 1;
+    }
+
+    .grow-ul li .arrow {
+      display: none;
+      margin-left: 10px;
+    }
+
+    .grow-ul li:hover .arrow {
+      display: inline;
+    }
+
+    .content {
+      display: flex;
+    }
+
+    .main-content {
+      flex: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .image-card {
+      position: relative;
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .image-card img {
+      width: 100%;
+      display: block;
+    }
+
+    .image-card .overlay {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 100px;
+      height: 100px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .image-card .overlay img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .wave-bg {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 150px;
+      background: linear-gradient(to right, #f5d365, #f2994a);
+      border-radius: 50% 50% 0 0;
+    }
+    .footer {
+      background-color: #1b1f27;
+      color: #ffffff;
+      padding: 20px 0;
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-start;
+  }
+  .footer div {
+      margin: 0 20px;
+  }
+  .footer div h3 {
+      margin-bottom: 10px;
+  }
+  .footer a {
+      color: #ffffff;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 5px;
+  }
+  .footer a:hover {
+      text-decoration: underline;
+  }
+  .footer .get-the-app img,
+  .footer .social-icons img {
+      width: 120px;
+      margin: 10px 0;
+  }
+  .footer .get-the-app img {
+      width: 140px;
+  }
+  .footer .social-icons a {
+      margin-right: 10px;
+  }
+  .footer .social-icons img {
+      width: 32px;
+      height: 32px;
+  }
+  .legal {
+      text-align: center;
+      margin-top: 20px;
+      background-color: #d5d8df;
+      
+  }
+  </style>
+</head>
+
+<body>
+  <div class="header custom-background d-flex justify-content-between align-items-center w-100 px-4">
+    <h1>Collers</h1>
+    <div>
+      <a href="#" class="btn btn-link">Products</a>
+      <a href="#" class="btn btn-link">Solutions</a>
+      <a href="#" class="btn btn-link">Pricing</a>
+      <a href="#" class="btn btn-link">Resources</a>
+      <a href="#" class="btn btn-link">Log In</a>
+      <a href="#" class="btn btn-custom">Sign up now</a>
+    </div>
+  </div>
+
+  <div class="section main-section">
+    <div class="container row-padding">
+      <div class="main-content">
+        <div class="row mt-2 w-500">
+        <div class="text-content">
+          <h2>Collectible Sneakers</h2>
+          <p class="lead">Sit elit feugiat turpis sed integer integer accumsan turpis. Sed suspendisse nec lorem mauris.
+            Pharetra, eu imperdiet ipsum ultrices amet.</p>
+          <div class="d-flex justify-content-start">
+            <a href="#" class="btn btn-custom mr-3">Sign up now</a>
+            <a href="#" class="btn btn-outline-secondary">Watch Demo</a>
+          </div>
+        </div>
+        
+        <div class="img-content">
+          <img src="shoes1.png" class="img-fluid" alt="Sneakers">
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="container row-padding">
+      <div class="row mt-5 w-100">
+        <div class="col-md-4 feature-box">
+          <div class="feature-icon">
+            <img src="https://via.placeholder.com/50" alt="Icon 1">
+          </div>
+          <h5>Nibh viverra</h5>
+          <p class="feature-description">Sit bibendum donec dolor fames neque vulputate non sit aliquam. Consequat
+            turpis natoque leo, massa.</p>
+        </div>
+        <div class="col-md-4 feature-box">
+          <div class="feature-icon">
+            <img src="https://via.placeholder.com/50" alt="Icon 2">
+          </div>
+          <h5>Cursus amet</h5>
+          <p class="feature-description">Sit bibendum donec dolor fames neque vulputate non sit aliquam. Consequat
+            turpis natoque leo, massa.</p>
+        </div>
+        <div class="col-md-4 feature-box">
+          <div class="feature-icon">
+            <img src="https://via.placeholder.com/50" alt="Icon 3">
+          </div>
+          <h5>Ipsum fermentum</h5>
+          <p class="feature-description">Sit bibendum donec dolor fames neque vulputate non sit aliquam. Consequat
+            turpis natoque leo, massa.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  
+
+    
+
+  <div class="section best-section">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>The best of the best</h2>
+        <a href="#" class="btn btn-custom-best">Sign up now</a>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Sneaker 1">
+            <div class="card-body">
+              <h5 class="card-title">Sneaker Model 1</h5>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                incididunt.</p>
+              <a href="#" class="btn btn-buy">Buy Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Sneaker 2">
+            <div class="card-body">
+              <h5 class="card-title">Sneaker Model 2</h5>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                incididunt.</p>
+              <a href="#" class="btn btn-buy">Buy Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Sneaker 3">
+            <div class="card-body">
+              <h5 class="card-title">Sneaker Model 3</h5>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                incididunt.</p>
+              <a href="#" class="btn btn-buy">Buy Now</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="section join-us-section">
+    <div class="join-us-content">
+      <div class="join-us-text">
+        <h2>Why join us</h2>
+        <ul>
+          <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+          <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+          <li>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat.</li>
+        </ul>
+        <a href="#" class="btn btn-custom mr-3">Sign up now</a>
+      </div>
+      <div class="join-us-image">
+        <img src="https://via.placeholder.com/400x300" alt="Grow your collection">
+        <button class="play-button">▶️</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="section love-us-section">
+    <div class="love-us-title">
+      <h2>Because They Love Us</h2>
+      <div class="love-us-navigation">
+        <button class="btn-prev">❮</button>
+        <button class="btn-next">❯</button>
+      </div>
+    </div>
+    <div class="love-us-container">
+      <div class="love-us-card">
+        <img src="https://via.placeholder.com/150" alt="Review 1">
+        <h5>John Doe</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua.</p>
+      </div>
+      <div class="love-us-card">
+        <img src="https://via.placeholder.com/150" alt="Review 2">
+        <h5>Jane Smith</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua.</p>
+      </div>
+      <div class="love-us-card">
+        <img src="https://via.placeholder.com/150" alt="Review 3">
+        <h5>Sam Johnson</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua.</p>
+      </div>
+      <div class="love-us-card">
+        <img src="https://via.placeholder.com/150" alt="Review 3">
+        <h5>Sam Johnson</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua.</p>
+      </div>
+
+      <div class="love-us-card">
+        <img src="https://via.placeholder.com/150" alt="Review 3">
+        <h5>Sam Johnson</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua.</p>
+      </div>
+      <div class="love-us-card">
+        <img src="https://via.placeholder.com/150" alt="Review 3">
+        <h5>Sam Johnson</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua.</p>
+      </div>
+      <div class="love-us-card">
+        <img src="https://via.placeholder.com/150" alt="Review 3">
+        <h5>Sam Johnson</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua.</p>
+      </div>
+      <div class="love-us-card">
+        <img src="https://via.placeholder.com/150" alt="Review 3">
+        <h5>Sam Johnson</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua.</p>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="section grow-section">
+
+    <div class="row mt-1 w-2">
+
+    
+    <div class="grow-title">
+      <h1>Grow your collection</h1>
+      <p>Ernim neque massa porta adipiscing elit. Sem libero id faucibus nibh amet dictum pellentesque sed. Eu non
+        turpis risus odio sapien, fames sit rhoncus. Nec magna sed interdum sit purus tellus. Et volutpat proin neque
+        placerat at bibendum quam tellus.</p>
+    </div>
+
+
+    <div class="grow-card">
+      <ul class="grow-ul">
+        <li class="list-item">
+          <i class="fas fa-search"></i>
+          <a href="#" class="list-link">Bibendum tellus</a>
+          <i class="fas fa-arrow-right arrow"></i>
+        </li>
+        <li class="list-item">
+          <i class="fas fa-shield-alt"></i>
+          <a href="#" class="list-link">Cras eget</a>
+          <i class="fas fa-arrow-right arrow"></i>
+        </li>
+        <li class="list-item">
+          <i class="fas fa-pen"></i>
+          <a href="#" class="list-link">Dolor pharetra</a>
+          <i class="fas fa-arrow-right arrow"></i>
+        </li>
+        <li class="list-item">
+          <i class="fas fa-desktop"></i>
+          <a href="#" class="list-link">Amet, fringilla</a>
+          <i class="fas fa-arrow-right arrow"></i>
+        </li>
+        <li class="list-item">
+          <i class="fas fa-podcast"></i>
+          <a href="#" class="list-link">Amet nibh</a>
+          <i class="fas fa-arrow-right arrow"></i>
+        </li>
+        <li class="list-item">
+          <i class="fas fa-utensils"></i>
+          <a href="#" class="list-link">Sed velit</a>
+          <i class="fas fa-arrow-right arrow"></i>
+        </li>
+      </ul>
+
+
+    </div>
+  </div>
+  </div>
+  <footer class="footer">
+    <div class="product">
+      <h3>Product</h3>
+      <a href="#">Pricing</a>
+      <a href="#">Overview</a>
+      <a href="#">Browse</a>
+      <a href="#">Accessibility</a>
+      <a href="#">Five</a>
+    </div>
+    <div class="solutions">
+      <h3>Solutions</h3>
+      <a href="#">Brainstorming</a>
+      <a href="#">Ideation</a>
+      <a href="#">Wireframing</a>
+      <a href="#">Research</a>
+      <a href="#">Design</a>
+    </div>
+    <div class="support">
+      <h3>Support</h3>
+      <a href="#">Contact Us</a>
+      <a href="#">Developers</a>
+      <a href="#">Documentation</a>
+      <a href="#">Integrations</a>
+      <a href="#">Reports</a>
+    </div>
+    <div class="get-the-app">
+      <h3>Get the App</h3>
+      <a href="#"><img src="https://via.placeholder.com/120x40?text=App+Store" alt="Download on the App Store"></a>
+      <a href="#"><img src="https://via.placeholder.com/120x40?text=Google+Play" alt="Get it on Google Play"></a>
+    </div>
+    <div class="follow-us">
+      <h3>Follow Us</h3>
+      <div class="social-icons">
+        <a href="#"><img src="https://via.placeholder.com/24?text=YT" alt="YouTube"></a>
+        <a href="#"><img src="https://via.placeholder.com/24?text=FB" alt="Facebook"></a>
+        <a href="#"><img src="https://via.placeholder.com/24?text=TW" alt="Twitter"></a>
+        <a href="#"><img src="https://via.placeholder.com/24?text=IG" alt="Instagram"></a>
+        <a href="#"><img src="https://via.placeholder.com/24?text=IN" alt="LinkedIn"></a>
+      </div>
+    </div>
+  </footer>
+  <div class="legal">
+    <p>Collers @ 2023. All rights reserved.</p>
+    <p><a href="#">Terms</a> | <a href="#">Privacy</a> | <a href="#">Contact</a></p>
+  </div>
+
+  <script>
+    document.querySelector('.btn-prev').addEventListener('click', function () {
+      document.querySelector('.love-us-container').scrollBy({
+        left: -250,
+        behavior: 'smooth'
+      });
+    });
+
+    document.querySelector('.btn-next').addEventListener('click', function () {
+      document.querySelector('.love-us-container').scrollBy({
+        left: 250,
+        behavior: 'smooth'
+      });
+    });
+  </script>
+</body>
+
+</html>
